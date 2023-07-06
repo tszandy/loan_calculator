@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>loan calculator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Loan Calculator</h2>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Basic Loan Calculator</a></li>
+            <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+            <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+            <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <label for="Total_Mortgage">Total Mortgage:</label>
+                <input type="text" id="Total_Mortgage" name="Total_Mortgage" value="400000">
+                <br />
+                <label for="Payment_Year">Payment Year: </label>
+                <input type="text" id="Payment_Year" name="Payment_Year" value="30">
+                <br />
+                <label for="Interest_Rate">Interest Rate: </label>
+                <input type="text" id="Interest_Rate" name="Interest_Rate" value="0.0723">
+                <br />
+                <br />
+                <button onclick="update_monthly_payment()">submit</button>
+                <br />
+                <br />
+                <label for="Monthly_Payment">Monthly Payment: </label>
+                <label for="Monthly_Payment_Amount" id="Monthly_Payment_Amount">0</label>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.</p>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam rem aperiam.</p>
+            </div>
+            <div id="menu3" class="tab-pane fade">
+                <h3>Menu 3</h3>
+                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function update_monthly_payment(){
+            let total_mortgage = Number(document.getElementById("Total_Mortgage").value);
+            let payment_year = Number(document.getElementById("Payment_Year").value);
+            let interest_rate = Number(document.getElementById("Interest_Rate").value);
+            let R = 1 + interest_rate / 12;
+            let denominator = 0
+            for (let i = 0; i < payment_year * 12; i++) {
+                denominator += Math.pow(R, i);
+            }
+            let monthly_payment = total_mortgage * Math.pow(R, payment_year * 12) / denominator
+            document.getElementById("Monthly_Payment_Amount").innerText = monthly_payment
+        }
+    </script>
+</body>
+
+</html>
