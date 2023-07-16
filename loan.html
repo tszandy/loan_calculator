@@ -17,33 +17,53 @@
 
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home">Basic Loan Calculator</a></li>
-            <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+            <li><a data-toggle="tab" href="#menu1">Duration Loan Calculator</a></li>
             <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
             <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
         </ul>
 
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
-                <label for="Total_Mortgage">Total Mortgage:</label>
+                <label>Total Mortgage:</label>
                 <input type="text" id="Total_Mortgage" name="Total_Mortgage" value="400000">
                 <br />
-                <label for="Payment_Year">Payment Year: </label>
+                <label>Payment Year: </label>
                 <input type="text" id="Payment_Year" name="Payment_Year" value="30">
                 <br />
-                <label for="Interest_Rate">Interest Rate: </label>
+                <label>Interest Rate: </label>
                 <input type="text" id="Interest_Rate" name="Interest_Rate" value="0.0723">
                 <br />
                 <br />
                 <button onclick="update_monthly_payment()">submit</button>
                 <br />
                 <br />
-                <label for="Monthly_Payment">Monthly Payment: </label>
-                <label for="Monthly_Payment_Amount" id="Monthly_Payment_Amount">0</label>
+                <label>Monthly Payment: </label>
+                <label id="Monthly_Payment_Amount">0</label>
             </div>
             <div id="menu1" class="tab-pane fade">
-                <h3>Menu 1</h3>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.</p>
+                <label>Total Mortgage:</label>
+                <input type="text" id="Total_Mortgage" name="Total_Mortgage" value="400000">
+                <br />
+                <label>Interest Rate: </label>
+                <input type="text" id="Interest_Rate" name="Interest_Rate" value="0.0723">
+                <br />
+                <br />
+                <button onclick="update_monthly_interest()">submit</button>
+                <br />
+                <br />
+                <label>Monthly Interest: </label>
+                <label for="Monthly_Interest_Amount" id="Monthly_Interest_Amount">0</label>
+                <br />
+                <label>Monthly Payment: </label>
+                <input type="text" id="Monthly_Payment" name="Monthly_Payment" value="0">
+                <br />
+                <label color="red">Monthly payment should be greater than monthly interest</label>
+                <br />
+                <br />
+                <button onclick="update_monthly_interest()">submit</button>
+                <br />
+                <br />
+                <label>Payoff Duration: </label>                
             </div>
             <div id="menu2" class="tab-pane fade">
                 <h3>Menu 2</h3>
@@ -69,6 +89,13 @@
             }
             let monthly_payment = total_mortgage * Math.pow(R, payment_year * 12) / denominator
             document.getElementById("Monthly_Payment_Amount").innerText = monthly_payment
+        }
+        function update_monthly_interest(){
+            let total_mortgage = Number(document.getElementById("Total_Mortgage").value);
+            let interest_rate = Number(document.getElementById("Interest_Rate").value);
+            let monthly_interest = total_mortgage * interest_rate/12;
+            document.getElementById("Monthly_Interest_Amount").innerText = monthly_interest
+            document.getElementById("Monthly_Payment").value = monthly_interest
         }
     </script>
 </body>
